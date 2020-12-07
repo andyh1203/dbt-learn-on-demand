@@ -2,12 +2,17 @@ version: 2
 
 models:
     - name: stg_payments
+      description: Staged payments data from Stripe
       columns:
         - name: id
+          description: Primary key
           tests: 
             - unique
             - not_null
+        - name: order_id
+          description: ID of the order (foreign key)
         - name: payment_method
+          description: Method used for the transaction
           tests:
             - accepted_values: 
                values: 
@@ -16,11 +21,14 @@ models:
                 - coupon
                 - gift_card
         - name: status
+          description: Status of the order (either success or fail)
           tests:
             - accepted_values: 
                 values: 
                     - success
                     - fail
-
-
+        - name: amount
+          description: The transaction amount
+        - name: created
+          description: When the transaction happened
             
